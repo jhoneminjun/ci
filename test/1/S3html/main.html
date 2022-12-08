@@ -1,0 +1,2865 @@
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- <meta http-equiv="Content-Script-Type" content="text/javascript"> -->
+		<!-- <meta http-equiv="Content-Style-Type" content="text/css"> -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, target-densitydpi=medium-dpi">
+		<meta name="format-detection" content="telephone=no">
+		<!-- <meta http-equiv="Content-Language" content="ko"> -->
+		<!-- <meta http-equiv="cache-control" content="no-cache"> -->
+		<!-- <meta http-equiv="pragma" content="no-cache"> -->
+
+		<meta name="title" content="서울교통공사">
+		<meta name="author" content="서울교통공사">
+		<meta name="keywords" content="서울교통공사">
+		<meta name="description" content="서울교통공사">
+		<title>Smart Subway System</title>
+		<link type="text/css" href="https://www.seoulmetro.co.kr/css/reset.css" rel="stylesheet">
+		<link type="text/css" href="https://www.seoulmetro.co.kr/css/layout.css" rel="stylesheet">
+		<link type="text/css" href="https://www.seoulmetro.co.kr/css/sub.css" rel="stylesheet">
+		<link type="text/css" href="https://www.seoulmetro.co.kr/css/style.css?ver=3" rel="stylesheet">
+		<link type="text/css" href="https://www.seoulmetro.co.kr/css/jquery-ui-1.9.2.custom.min.css" rel="stylesheet">
+		<link type="text/css" href="https://www.seoulmetro.co.kr/css/examples.css" rel="stylesheet"> <!-- 메인 css -->
+		<link type="text/css" href="https://www.seoulmetro.co.kr/css/jquery.fullPage.css" rel="stylesheet"><!-- 메인 css -->
+		<link type="text/css" href="https://www.seoulmetro.co.kr/css/main.css?ver=3" rel="stylesheet"> <!-- 메인 css -->
+		<link type="text/css" href="https://www.seoulmetro.co.kr/css/jquery.bxslider.css" rel="stylesheet"> <!-- 메인 css -->
+		<script src="https://www.seoulmetro.co.kr/js/jquery-1.11.1.min.js"></script>
+		<script src="https://www.seoulmetro.co.kr/js/common.js"></script>
+		<script src="https://www.seoulmetro.co.kr/js/gnb.js"></script>
+		<script src="https://www.seoulmetro.co.kr/js/examples.js"></script> <!-- 메인 js -->
+		<script src="https://www.seoulmetro.co.kr/js/jquery.fullPage.js"></script> <!-- 메인 js -->
+		<script src="https://www.seoulmetro.co.kr/js/jquery.bxslider.js"></script> <!-- 메인 js -->
+   		<script src="http://www.seoul.go.kr/seoulgnb/gnb.js"></script>
+		<link rel="shortcut icon" href="https://nonstopbebe.s3.ap-northeast-2.amazonaws.com/favicon.ico"><!-- 파비콘 -->
+		<link rel="stylesheet" type="text/css" href="https://www.seoulmetro.co.kr/css/examples_sd.css" media="screen"/>
+		<link rel="stylesheet" type="text/css" href="https://www.seoulmetro.co.kr/css/slider-pro.min.css" media="screen"/>
+		
+		<style>
+			.cont_top_lf2{float:left;width:405px;height:100px;padding:0 0px 0 0px;margin-right: 200px;}
+			.cont_top_ct2{float:left;margin-left: 150px;width:370px;}
+			/* .cont_top_rt2{float:left;width:325px;height:360px;background:rgba(31,78,121,0.2);padding:0 20px;margin-left: 20px;}
+			.cont_bottom_rt2{float:right;background:rgba(31,78,121,0.2);padding:0 20px; width:325px; margin-top:25px; height:140px; margin-right: 230px;} */
+			.intro2{position:relative;/* width:1288px; */width:1505px; margin:0 auto;/*height:547px;*/}
+			#section01 {background-image: url("https://nonstopbebe.s3.ap-northeast-2.amazonaws.com/main_bg.jpg") }
+			.s-title2{margin-left: 70px;}
+
+		</style>
+		
+	</head>
+			
+<body id="main">
+<!--
+<div class="popup pop5" id="pop50" >
+	<div class="pop-con">
+		<img src="https://www.seoulmetro.co.kr/images/popup/main_popup51.png" alt=""/>
+	</div>
+	<div class="pop-fot">
+		<input type="checkbox" name="pop_today" id="pop_today"/><label for="pop_today">오늘하루 열지않기</label> <a href="javascript:closeWin();" class="btn-today-fot">닫기</a>
+	</div>
+</div>-->
+
+<script src="https://www.seoulmetro.co.kr/common/resources/js/global_common.js"></script> <!--  popup -->
+
+	<script >
+
+	function setCookie( name, value, expirehours ) { 
+	 var todayDate = new Date(); 
+	 todayDate.setHours( todayDate.getHours() + expirehours ); 
+	 document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";" 
+	} 
+
+	function closeWin() { 
+	 if(document.getElementById("pop_today").checked){
+	  setCookie( "ncookie", "done" , 24 ); 
+	 }
+	 document.getElementById('pop50').style.display = "none";}
+	
+
+function checkLoginMain() {
+  document.goLogin.submit();
+}
+	
+function sessionExtend() {
+
+	var url = "https://www.seoulmetro.co.kr/kr/common/sessionExtend.do";
+	var data = new Array();
+	data = {};
+
+	var successFn = function(json) {
+		
+		alert("새션이 10분 연장 되었습니다.");	  	 
+	};
+
+	$.ajax({
+		type: 'post',
+		cache: false,
+		url: url,
+		data: data,
+		dataType: 'json',
+		success: successFn
+	});		
+}
+
+
+	
+</script>
+
+<form name="goLogin" action="https://www.seoulmetro.co.kr/kr/metroLogin.do?menuIdx=790" method="post">
+<input type="hidden" name="menuIdx" value="354"/>
+<input type="hidden" name="url" value="https://www.seoulmetro.co.kr/kr/index.do?menuIdx=354"/>
+</form>
+		
+		
+		<div class="wrap ver2"> 
+			<!-- skip-->
+			<div class="skip-nav">
+				<a href="#section0">본문 바로가기</a>
+				<a href="#gnb">주 메뉴 바로가기</a>
+			</div>
+
+			<script>
+				var popCount = 0;
+				var popActive = 0;
+				var popStatus = true;
+
+				$(document).ready(function() {
+					cookiedata = document.cookie; 
+					popCount = $(".pop .list li").size();
+					//console.log("팝업 개수 : "+popCount);
+					$(".indicator").html("1 / " + popCount);
+					for(i=0; i<popCount; i++) {
+						$(".pop .nav").append("<li>&nbsp;</li>");
+					}
+					$(".pop .nav li:first-child").addClass("active");
+					var timer = setInterval(rolling, 5000);
+					
+					$(".pop-in .list").hover(function(ev){
+						clearInterval(timer);
+					}, function(ev) {
+						timer = setInterval(rolling, 5000);
+					});
+					$(".pop .list img").focus(function(ev){
+						clearInterval(timer);
+					}, function(ev) {
+						timer = setInterval(rolling, 5000);
+					});
+					$(".prev-btn").focus(function(ev){
+						clearInterval(timer);
+					}, function(ev) {
+						timer = setInterval(rolling, 5000);
+					});
+					$(".next-btn").focus(function(ev){
+						clearInterval(timer);
+					}, function(ev) {
+						timer = setInterval(rolling, 5000);
+					});
+					if(popCount <= 1) {
+						$(".pop .next-link").css("visibility","hidden");
+					}
+					
+
+					$(".stop-start-pop").click(function(){
+						if(popStatus) {
+							//팝업 활성화된 경우 정지
+							clearInterval(timer);
+							timer = null;
+							popStatus = false;
+							$(".stop-start-pop").text('재생');
+							//console.log("팝업 정지 처리완료");
+						} else {
+							//팝업 활성화 안된 경우 시작 
+							if(timer) {
+								clearInterval(timer);
+							}
+							timer = setInterval(rolling, 5000);
+							popStatus = true;
+							$(".stop-start-pop").text('정지');
+							//console.log("팝업 재생 처리완료");
+						}
+					});
+
+					function rolling() {
+						//console.log("현재 active : "+popActive);
+						
+						if(popActive >= popCount-1) {
+							popActive = 0;
+						} else {
+							popActive += 1;
+						}
+						//console.log("다음 active : "+popActive);
+
+						$(".pop .list li").css("display", "none");
+						$(".pop .nav li").removeClass("active");
+
+						$(".pop .list li").eq(popActive).css("display", "block");
+						$(".pop .nav li").eq(popActive).addClass("active");
+						
+						$(".pop .next-link").css("visibility","visible");
+						$(".pop .prev-link").css("visibility","visible");
+						
+						if(popActive == 0) {
+							$(".pop .prev-link").css("visibility","hidden");
+						} else if(popActive >= popCount-1) {
+							$(".pop .next-link").css("visibility","hidden");
+						}
+						if(popCount <= 1) {
+							$(".pop .next-link").css("visibility","hidden");
+						}
+						$(".indicator").html(popActive+1 + " / " + popCount);
+					}
+
+					$(".pop .nav li").click(function() {
+						popActive = $(".pop .nav li").index(this);
+
+						$(".pop .list li").css("display", "none");
+						$(".pop .nav li").removeClass("active");
+
+						$(".pop .list li").eq(popActive).css("display", "block");
+						$(".pop .nav li").eq(popActive).addClass("active");
+
+					});
+					
+					$(".exit-btn").click(function() {
+						$(".pop").css("display", "none");
+						$(".header").css("top","0");
+						$(".pos1").css("padding-top","0");
+						$(".pos1").css("margin-top","0");
+						$(".pos2").css("padding-top","0");
+						$(".pos2").css("margin-top","0");
+						$(".pos3").css("padding-top","0");
+						$(".pos3").css("margin-top","0");
+
+						if(document.getElementById("today-exit").checked) {
+							setCookie( "ncookie", "done" , 24 ); 	
+						}
+					});
+ 
+
+
+				});
+
+				function nextPop() {
+					if(popActive < popCount-1) {
+						popActive += 1;
+						$(".pop .list li").css("display", "none");
+						$(".pop .nav li").removeClass("active");
+
+						$(".pop .list li").eq(popActive).css("display", "block");
+						$(".pop .nav li").eq(popActive).addClass("active");
+						
+						$(".pop .next-link").css("visibility","visible");
+						$(".pop .prev-link").css("visibility","visible");
+						
+						if(popActive == 0) {
+							$(".pop .prev-link").css("visibility","hidden");
+						} else if((popActive >= popCount-1) || popCount <= 1) {
+							$(".pop .next-link").css("visibility","hidden");
+						}
+						$(".indicator").html(popActive+1 + " / " + popCount);
+					}
+					
+				}
+				
+				function prevPop() {
+					if(popActive > 0) {
+						popActive -= 1;
+						$(".pop .list li").css("display", "none");
+						$(".pop .nav li").removeClass("active");
+
+						$(".pop .list li").eq(popActive).css("display", "block");
+						$(".pop .nav li").eq(popActive).addClass("active");
+						
+						$(".pop .next-link").css("visibility","visible");
+						$(".pop .prev-link").css("visibility","visible");
+						
+						if(popActive == 0) {
+							$(".pop .prev-link").css("visibility","hidden");
+						} else if((popActive >= popCount-1) || popCount <= 1) {
+							$(".pop .next-link").css("visibility","hidden");
+						}
+						$(".indicator").html(popActive+1 + " / " + popCount);
+					}
+				}
+
+			</script>
+
+
+			<!-- 다중팝업 끝-->
+
+
+
+			<div class="header">
+				
+				<div class="header-in">	
+<div class="seoul-gnb">
+<h1 class="top-logo"><img src="https://nonstopbebe.s3.ap-northeast-2.amazonaws.com/logo.png" alt="3S" /></a></h1>
+<span class="top-etc-gnb"><a href="#;"><span class="hide">메뉴열기</span></a></span>
+<div id="seoul-common-gnb"></div>
+
+						<div class="top-etc clearfix">
+							<ul class="clearfix">
+								<li class="top-etc-sitmap"><a href="#;" title="사이트맵"><span class="hide">사이트맵</span></a></li>
+								<li class="top-etc-cer"><a href="/auth/logout" onClick="checkLoginMain();" title="로그아웃"><span class="hide">로그아웃</span></a></li>
+								<li class="top-etc-shc"><a href="#;" title="검색"><span class="hide">검색창 열기</span></a></li>
+								<li class="top-etc-lang">
+									<a href="#;" title="다국어사이트"><span class="hide">다국어사이트 열기</span></a>
+									<ul class="lang-link">
+										<li><a href="/en/index.do" >ENGLISH</a></li>
+										<li><a href="/cn/index.do">中文</a></li>
+										<li><a href="/jp/index.do">日本語</a></li>
+									</ul>
+								</li>
+							</ul>
+							<a href="#;" onClick="sessionExtend();" class="icon-clock"><img src="https://www.seoulmetro.co.kr/images/layout/clock.png" alt="세션연장하기"></a>
+					</div><!-- //top-etc -->
+						
+					</div><!-- //header-top -->
+					
+					
+						
+					<script>
+
+$('document').ready(function(){
+	var isMobile = document.getElementById("isMobile").value;
+	if(isMobile != "Y"){
+		if($(window).width() > 1024){
+			$('.mn1').mouseenter(function(){
+				var wid, gnb2w;
+	 			wid = $('.gnb').width();
+				$('.sgnb-wp').css('width', wid);
+				$('.gnb2 > li').css('width', $('.gnb > li').width());
+				$('.mn1 > .sgnb-wp').css('left', 0);
+				$('.mn1 > .sgnb-wp').slideDown(300);
+				$('.mn1 > .sgnb-wp').css('display','block');
+				$('.mn2 > .sgnb-wp').css('display','none');
+				$('.mn3 > .sgnb-wp').css('display','none');
+				$('.mn4 > .sgnb-wp').css('display','none');
+				$('.mn5 > .sgnb-wp').css('display','none');
+				$('.mn6 > .sgnb-wp').css('display','none');
+				
+			});
+			$('.mn2').mouseenter(function(){
+				var wid, gnb2w;
+				wid = $('.gnb').width();
+				$('.gnb2 > li').css('width', $('.gnb > li').width());
+				$('.sgnb-wp').css('width', wid);
+				gnb2w = $('.mn1').width() * -1;
+ 				$('.mn2 > .sgnb-wp').css('left', gnb2w);
+				$('.mn1 > .sgnb-wp').css('display','none');
+				$('.mn2 > .sgnb-wp').slideDown(300);
+				$('.mn2 > .sgnb-wp').css('display','block');
+				$('.mn3 > .sgnb-wp').css('display','none');
+				$('.mn4 > .sgnb-wp').css('display','none');
+				$('.mn5 > .sgnb-wp').css('display','none');
+				$('.mn6 > .sgnb-wp').css('display','none'); 
+				/* $('.tm-gnb-mask').css('height','600px'); */
+			});
+			/* $('.mn2').mouseleave(function(){
+				$('.tm-gnb-mask').css('height','457px');
+			}); */
+			$('.mn3').mouseenter(function(){
+				var wid, gnb2w;
+				wid = $('.gnb').width();
+				$('.gnb2 > li').css('width', $('.gnb > li').width());
+				$('.mn3 > .sgnb-wp').css('width', wid);
+				gnb2w = ($('.mn1').width() * -1 ) + ($('.mn2').width() * -1 );
+				$('.sgnb-wp').css('left', gnb2w);
+				$('.mn1 > .sgnb-wp').css('display','none');
+				$('.mn2 > .sgnb-wp').css('display','none');
+				$('.mn3 > .sgnb-wp').slideDown(300);
+				$('.mn3 > .sgnb-wp').css('display','block');
+				$('.mn4 > .sgnb-wp').css('display','none');
+				$('.mn5 > .sgnb-wp').css('display','none');
+				$('.mn6 > .sgnb-wp').css('display','none');
+				
+			});
+			$('.mn4').mouseenter(function(){
+				var wid, gnb2w;
+				wid = $('.gnb').width();
+				$('.gnb2 > li').css('width', $('.gnb > li').width());
+				$('.mn4 > .sgnb-wp').css('width', wid);
+				gnb2w = ($('.mn1').width() * -1 ) + ($('.mn2').width() * -1 ) + ($('.mn3').width() * -1 );
+				$('.sgnb-wp').css('left', gnb2w);
+				$('.mn1 > .sgnb-wp').css('display','none');
+				$('.mn2 > .sgnb-wp').css('display','none');
+				$('.mn3 > .sgnb-wp').css('display','none');
+				$('.mn4 > .sgnb-wp').slideDown(300);
+				$('.mn4 > .sgnb-wp').css('display','block');
+				$('.mn5 > .sgnb-wp').css('display','none');
+				$('.mn6 > .sgnb-wp').css('display','none');
+				
+			});
+			$('.mn5').mouseenter(function(){
+				var wid, gnb2w;
+				wid = $('.gnb').width();
+				$('.gnb2 > li').css('width', $('.gnb > li').width());
+				$('.mn5 > .sgnb-wp').css('width', wid);
+				gnb2w = ($('.mn1').width() * -1 ) + ($('.mn2').width() * -1 ) + ($('.mn3').width() * -1 ) + ($('.mn4').width() * -1 );
+				$('.sgnb-wp').css('left', gnb2w);
+				$('.mn1 > .sgnb-wp').css('display','none');
+				$('.mn2 > .sgnb-wp').css('display','none');
+				$('.mn3 > .sgnb-wp').css('display','none');
+				$('.mn4 > .sgnb-wp').css('display','none');
+				$('.mn5 > .sgnb-wp').slideDown(300);
+				$('.mn5 > .sgnb-wp').css('display','block');
+				$('.mn6 > .sgnb-wp').css('display','none');
+				
+			});
+			$('.mn6').mouseenter(function(){
+				var wid, gnb2w;
+				wid = $('.gnb').width();
+				$('.gnb2 > li').css('width', $('.gnb > li').width());
+				$('.mn6 > .sgnb-wp').css('width', wid);
+				gnb2w = ($('.mn1').width() * -1 ) + ($('.mn2').width() * -1 ) + ($('.mn3').width() * -1 ) + ($('.mn4').width() * -1 ) + ($('.mn5').width() * -1 );
+				$('.sgnb-wp').css('left', gnb2w);
+				$('.mn1 > .sgnb-wp').css('display','none');
+				$('.mn2 > .sgnb-wp').css('display','none');
+				$('.mn3 > .sgnb-wp').css('display','none');
+				$('.mn4 > .sgnb-wp').css('display','none');
+				$('.mn5 > .sgnb-wp').css('display','none');
+				$('.mn6 > .sgnb-wp').slideDown(300);
+				$('.mn6 > .sgnb-wp').css('display','block');
+				
+			});
+			$('.mn1').keyup(function(){
+				var wid, gnb2w;
+	 			wid = $('.gnb').width();
+				$('.sgnb-wp').css('width', wid);
+				$('.gnb2 > li').css('width', $('.gnb > li').width());
+				$('.mn1 > .sgnb-wp').css('left', 0);
+				$('.mn1 > .sgnb-wp').slideDown(300);
+				$('.mn1 > .sgnb-wp').css('display','block');
+				$('.mn2 > .sgnb-wp').css('display','none');
+				$('.mn3 > .sgnb-wp').css('display','none');
+				$('.mn4 > .sgnb-wp').css('display','none');
+				$('.mn5 > .sgnb-wp').css('display','none');
+				$('.mn6 > .sgnb-wp').css('display','none');
+				
+			});
+			$('.mn2').keyup(function(){
+				var wid, gnb2w;
+				wid = $('.gnb').width();
+				$('.gnb2 > li').css('width', $('.gnb > li').width());
+				$('.sgnb-wp').css('width', wid);
+				gnb2w = $('.mn1').width() * -1;
+ 				$('.mn2 > .sgnb-wp').css('left', gnb2w);
+				$('.mn1 > .sgnb-wp').css('display','none');
+				$('.mn2 > .sgnb-wp').slideDown(300);
+				$('.mn2 > .sgnb-wp').css('display','block');
+				$('.mn3 > .sgnb-wp').css('display','none');
+				$('.mn4 > .sgnb-wp').css('display','none');
+				$('.mn5 > .sgnb-wp').css('display','none');
+				$('.mn6 > .sgnb-wp').css('display','none'); 
+				/* $('.tm-gnb-mask').css('height','600px'); */
+			});
+			/* $('.mn2').mouseleave(function(){
+				$('.tm-gnb-mask').css('height','457px');
+			}); */
+			$('.mn3').keyup(function(){
+				var wid, gnb2w;
+				wid = $('.gnb').width();
+				$('.gnb2 > li').css('width', $('.gnb > li').width());
+				$('.mn3 > .sgnb-wp').css('width', wid);
+				gnb2w = ($('.mn1').width() * -1 ) + ($('.mn2').width() * -1 );
+				$('.sgnb-wp').css('left', gnb2w);
+				$('.mn1 > .sgnb-wp').css('display','none');
+				$('.mn2 > .sgnb-wp').css('display','none');
+				$('.mn3 > .sgnb-wp').slideDown(300);
+				$('.mn3 > .sgnb-wp').css('display','block');
+				$('.mn4 > .sgnb-wp').css('display','none');
+				$('.mn5 > .sgnb-wp').css('display','none');
+				$('.mn6 > .sgnb-wp').css('display','none');
+				
+			});
+			$('.mn4').keyup(function(){
+				var wid, gnb2w;
+				wid = $('.gnb').width();
+				$('.gnb2 > li').css('width', $('.gnb > li').width());
+				$('.mn4 > .sgnb-wp').css('width', wid);
+				gnb2w = ($('.mn1').width() * -1 ) + ($('.mn2').width() * -1 ) + ($('.mn3').width() * -1 );
+				$('.sgnb-wp').css('left', gnb2w);
+				$('.mn1 > .sgnb-wp').css('display','none');
+				$('.mn2 > .sgnb-wp').css('display','none');
+				$('.mn3 > .sgnb-wp').css('display','none');
+				$('.mn4 > .sgnb-wp').slideDown(300);
+				$('.mn4 > .sgnb-wp').css('display','block');
+				$('.mn5 > .sgnb-wp').css('display','none');
+				$('.mn6 > .sgnb-wp').css('display','none');
+				
+			});
+			$('.mn5').keyup(function(){
+				var wid, gnb2w;
+				wid = $('.gnb').width();
+				$('.gnb2 > li').css('width', $('.gnb > li').width());
+				$('.mn5 > .sgnb-wp').css('width', wid);
+				gnb2w = ($('.mn1').width() * -1 ) + ($('.mn2').width() * -1 ) + ($('.mn3').width() * -1 ) + ($('.mn4').width() * -1 );
+				$('.sgnb-wp').css('left', gnb2w);
+				$('.mn1 > .sgnb-wp').css('display','none');
+				$('.mn2 > .sgnb-wp').css('display','none');
+				$('.mn3 > .sgnb-wp').css('display','none');
+				$('.mn4 > .sgnb-wp').css('display','none');
+				$('.mn5 > .sgnb-wp').slideDown(300);
+				$('.mn5 > .sgnb-wp').css('display','block');
+				$('.mn6 > .sgnb-wp').css('display','none');
+				
+			});
+			$('.mn6').keyup(function(){
+				var wid, gnb2w;
+				wid = $('.gnb').width();
+				$('.gnb2 > li').css('width', $('.gnb > li').width());
+				$('.mn6 > .sgnb-wp').css('width', wid);
+				gnb2w = ($('.mn1').width() * -1 ) + ($('.mn2').width() * -1 ) + ($('.mn3').width() * -1 ) + ($('.mn4').width() * -1 ) + ($('.mn5').width() * -1 );
+				$('.sgnb-wp').css('left', gnb2w);
+				$('.mn1 > .sgnb-wp').css('display','none');
+				$('.mn2 > .sgnb-wp').css('display','none');
+				$('.mn3 > .sgnb-wp').css('display','none');
+				$('.mn4 > .sgnb-wp').css('display','none');
+				$('.mn5 > .sgnb-wp').css('display','none');
+				$('.mn6 > .sgnb-wp').slideDown(300);
+				$('.mn6 > .sgnb-wp').css('display','block');
+				
+			});
+		}
+	}
+	/* $(window).resize(function(){
+		if($(window).width() < 1024){
+			location.reload();
+		}
+	}); */
+});
+
+
+function topMenuClick(url, newwin){
+	
+	var isMobile = document.getElementById("isMobile").value;
+	if(isMobile == "Y"){
+	}
+	else{
+		if (newwin == "Y") {
+			window.open(url, "_blank");
+		} else {
+			location.href = url;
+		}
+	}
+}
+</script>
+<div class="gnb-box">
+  <div>	
+  	<div class="gnb-top clearfix">
+  		<span class="btn-close-mn"><a href="#;">메뉴닫기</a></span>
+	</div>
+	<ul class="gnb" id="gnb">
+		<li class="mn1 on2"   >
+		<h2><a href="#;" title="1"  onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=354', 'N');"><span>이용정보</span></a></h2>
+
+			<div class="sgnb-wp">
+				<div class="gnb-box2">
+					<h3>이용정보</h3>
+					
+					<ul class="gnb2 clearfix">
+						
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;" title="새창으로 열림"  onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/cyberStation.do?menuIdx=538', 'Y');"><span>사이버스테이션</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/cyberStation.do?menuIdx=538" target="_blank" title="새창으로 열림"><span>사이버스테이션</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;" title="새창으로 열림"  onClick="topMenuClick('https://smss.seoulmetro.co.kr/traininfo/traininfoUserView.do', 'Y');"><span>실시간열차운행정보</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://smss.seoulmetro.co.kr/traininfo/traininfoUserView.do" target="_blank" title="새창으로 열림"><span>실시간열차운행정보</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/delayProofList.do?menuIdx=543', 'N');"><span>간편지연증명서</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/delayProofList.do?menuIdx=543" target="_blank"><span>간편지연증명서</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=354', 'N');"><span>운임제도</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=354" target="_blank"><span>운임안내</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=355" target="_blank"><span>승차권안내</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/fare.do?menuIdx=527" target="_blank"><span>단체권운임안내</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=528" target="_blank"><span>여객운송약관(1~8호선)</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=779" target="_blank"><span>여객운송약관(9호선 언주~중앙보훈병원)</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=366', 'N');"><span>이용고객 편의시설</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=366" target="_blank"><span>배려시설 현황</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/equipmentList.do?menuIdx=367" target="_blank"><span>승강설비 가동현황</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=769" target="_blank"><span>휠체어 이용 승·하차 안내</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=569" target="_blank"><span>무인편의기기</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=195" target="_blank"><span>문화공간</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=540" target="_blank"><span>환승주차장</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=542" target="_blank"><span>자전거 보관함</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=588" target="_blank"><span>수유실</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=746" target="_blank"><span>잠실광역환승센터</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=843" target="_blank"><span>또타스토리지(개인창고)</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/tempClosurList.do?menuIdx=775', 'N');"><span>역시설물 임시폐쇄 공사현황</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/tempClosurList.do?menuIdx=775" target="_blank"><span>역시설물 임시폐쇄 공사현황</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=730', 'N');"><span>유실물센터</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=730" target="_blank"><span>이용안내</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=541" target="_blank"><span>유실물센터</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						</ul>
+					</div> <!--//gnb-box2 -->
+			</div><!--//sgnb-wp -->
+		</li>
+		<li class="mn2"   >
+		<h2><a href="#;" title="1"  onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=479', 'N');"><span>안전환경</span></a></h2>
+
+			<div class="sgnb-wp">
+				<div class="gnb-box2">
+					<h3>안전환경</h3>
+					
+					<ul class="gnb2 clearfix">
+						
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=479', 'N');"><span>안전가이드</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=480" target="_blank"><span>안전수칙</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=482" target="_blank"><span>열차내에서</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=483" target="_blank"><span>교통약자배려시설 이용시</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=484" target="_blank"><span>지진발생시</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=485" target="_blank"><span>화재시</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=734', 'N');"><span>안전헌장</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=734" target="_blank"><span>안전헌장</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=552', 'N');"><span>안전경영방침</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=552" target="_blank"><span>안전경영방침</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/board.do?menuIdx=553', 'N');"><span>안전관련법령</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=553" target="_blank"><span>안전관련법령</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/board.do?menuIdx=554', 'N');"><span>안전보고서</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=554" target="_blank"><span>안전보고서</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=498', 'N');"><span>산업현황</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=498" target="_blank"><span>산업재산권현황</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=499" target="_blank"><span>신사업개발현황</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=500" target="_blank"><span>철도사업현황</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=501" target="_blank"><span>기술연구자료실</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=808" target="_blank"><span>교통정책자료실</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/board.do?menuIdx=555', 'N');"><span>안전동영상</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=555" target="_blank"><span>안전동영상</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=488', 'N');"><span>안전장비 취급 및 현황</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=489" target="_blank"><span>안전장비 취급요령</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=490" target="_blank"><span>역사 내 안전장비</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=491" target="_blank"><span>열차 내 안전장비</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=556', 'N');"><span>지하철테러대응</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=556" target="_blank"><span>지하철테러대응</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=739" target="_blank"><span>자료실</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=494', 'N');"><span>지하철역 환경</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=494" target="_blank"><span>개요</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=495" target="_blank"><span>측정결과</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=496" target="_blank"><span>위생관리</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						</ul>
+					</div> <!--//gnb-box2 -->
+			</div><!--//sgnb-wp -->
+		</li>
+		<li class="mn3"   >
+		<h2><a href="#;" title="1"  onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/volunteer.do?menuIdx=396&reservegroupid=1', 'N');"><span>설비현황</span></a></h2>
+
+			<div class="sgnb-wp">
+				<div class="gnb-box2">
+					<h3>시민 참여</h3>
+					
+					<ul class="gnb2 clearfix">
+						
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/volunteer.do?menuIdx=396&reservegroupid=1', 'N');"><span>신청센터</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/volunteer.do?menuIdx=396&reservegroupid=1" target="_blank"><span>자원봉사</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/garage.do?menuIdx=401&reservegroupid=3" target="_blank"><span>차량사업소견학</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/rent.do?menuIdx=394" target="_blank"><span>미술관 대관</span></a></li>
+									
+									<li ><a href="https://hrd.seoulmetro.co.kr/jsp/user/center/loanInquiry.jsp" target="_blank" title="새창으로 열림"><span>인재개발원 대관</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/filmList.do?menuIdx=395" target="_blank"><span>시설물 촬영</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/engineer.do?menuIdx=399" target="_blank"><span>기관사 체험</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/safetyExperience.do?menuIdx=753&reservegroupid=6" target="_blank"><span>시민안전체험·홍보관</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/eventList.do?menuIdx=392', 'N');"><span>이벤트</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/eventList.do?menuIdx=545" target="_blank" title="새창으로 열림"><span>참여하기</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=91" target="_blank"><span>제안하기</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=385', 'N');"><span>시민안전모니터</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=385" target="_blank"><span>안내</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=386" target="_blank"><span>공지사항</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/privateList.do?menuIdx=135&cdvocchannel=3" target="_blank"><span>모니터링</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=388', 'N');"><span>고객서비스 헌장</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=388" target="_blank"><span>고객서비스 헌장</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=389" target="_blank"><span>이행 표준</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/serviceQualityList.do?menuIdx=871" target="_blank"><span>이행 실적</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/executionList.do?menuIdx=390" target="_blank"><span>이행 실적(9호선)</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/juminyesanList.do?menuIdx=785', 'N');"><span>주민참여예산</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/juminyesanList.do?menuIdx=785" target="_blank"><span>제안하기</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=813" target="_blank"><span>연도별 사업추진 실적</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=374', 'N');"><span>고객의 소리</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=374" target="_blank"><span>이용 안내</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=375" target="_blank"><span>자주 묻는 질문</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=376" target="_blank"><span>신청</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/themeList.do?menuIdx=410', 'N');"><span>문화스테이션</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/themeList.do?menuIdx=410" target="_blank"><span>테마여행</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=409" target="_blank"><span>지하철 여행</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/concertList.do?menuIdx=411" target="_blank"><span>공연프리존</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=762" target="_blank"><span>아티스트 소개</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=413" target="_blank"><span>문화갤러리</span></a></li>
+									
+									<li ><a href="https://webzine.seoulmetro.co.kr/newshome/mtnmain.php" target="_blank" title="새창으로 열림"><span>서울교통공사 웹진</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/ideaList.do?menuIdx=379&bbs_cd=pro001', 'N');"><span>시민 아이디어</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/ideaList.do?menuIdx=379&bbs_cd=pro001" target="_blank"><span>아이디어 보기</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						</ul>
+					</div> <!--//gnb-box2 -->
+			</div><!--//sgnb-wp -->
+		</li>
+		<li class="mn4"   >
+		<h2><a href="#;" title="1"  onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/board.do?menuIdx=546', 'N');"><span>알림마당</span></a></h2>
+
+			<div class="sgnb-wp">
+				<div class="gnb-box2">
+					<h3>알림마당</h3>
+					
+					<ul class="gnb2 clearfix">
+						
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/board.do?menuIdx=546', 'N');"><span>공지사항</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=546" target="_blank"><span>공지사항</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/board.do?menuIdx=547', 'N');"><span>보도자료</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=547" target="_blank"><span>보도자료</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=417', 'N');"><span>입찰/계약정보</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=417" target="_blank"><span>입찰안내</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=418" target="_blank"><span>발주계획</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=423" target="_blank"><span>사전규격공개</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/noticeList.do?menuIdx=419" target="_blank"><span>입찰공고 및 결과</span></a></li>
+									
+									<li ><a href="privList.do?menuIdx=776&zmetd2=03" target="_blank"><span>계약현황</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/payList.do?menuIdx=422" target="_blank"><span>대금지급안내</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=424" target="_blank"><span>제안서 평가결과</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=751" target="_blank"><span>건설공사/하도급계약현황</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/printList.do?menuIdx=420" target="_blank"><span>실적증명서 발급</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/privList.do?menuIdx=425" target="_blank"><span>수의계약내역 및 실적</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=421" target="_blank"><span>계약자료실</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=822" target="_blank"><span>계약내용 변경사항</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=823" target="_blank"><span>감리·감독·검사 현황</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=428', 'N');"><span>부대사업정보</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=428" target="_blank"><span>광고시설물</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=429" target="_blank"><span>편의시설물</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/mallList.do?menuIdx=430" target="_blank"><span>역구내상가</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=833" target="_blank"><span>자주묻는질문</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/board.do?menuIdx=548', 'N');"><span>자료실</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=548" target="_blank"><span>자료실</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=849', 'N');"><span>업무협의절차</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=849" target="_blank"><span>인접굴착공사</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=850" target="_blank"><span>연결통로설치</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						</ul>
+					</div> <!--//gnb-box2 -->
+			</div><!--//sgnb-wp -->
+		</li>
+		<li class="mn5"   >
+		<h2><a href="#;" title="1"  onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=435', 'N');"><span>정보공개</span></a></h2>
+
+			<div class="sgnb-wp">
+				<div class="gnb-box2">
+					<h3>정보공개</h3>
+					
+					<ul class="gnb2 clearfix">
+						
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=435', 'N');"><span>제도안내</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=435" target="_blank"><span>정보공개제도란</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=436" target="_blank"><span>관련규정</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=437" target="_blank"><span>관련서식</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=828" target="_blank"><span>비공개대상정보 세부기준</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=867" target="_blank"><span>자주 청구하는 항목 안내</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/board.do?menuIdx=820&sort_order=asc', 'N');"><span>사전정보공표</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=820&sort_order=asc" target="_blank"><span>사전정보 공표목록</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=441" target="_blank"><span>업무추진비</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=872" target="_blank"><span>자주 조회하는 사전정보</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/board.do?menuIdx=551', 'N');"><span>공공데이터개방</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=551" target="_blank"><span>공공데이터개방</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=846" target="_blank"><span>공공데이터 수요조사</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/board.do?menuIdx=875', 'N');"><span>반부패/청렴</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=875" target="_blank"><span>반부패/청렴관련 사규</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=455" target="_blank"><span>반부패/청렴활동 자료실</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=458" target="_blank"><span>부패공직자 현황 공개</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=460" target="_blank"><span>청렴도 및 시책평가 결과</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=829&channel=6', 'N');"><span>부조리신고센터</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=829&channel=6" target="_blank"><span>인사비리 제보신고</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=462&channel=1" target="_blank"><span>공직자비리신고</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=464&channel=3" target="_blank"><span>갑의 부당행위 신고</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/waste.do?menuIdx=451&cdvocchannel=11" target="_blank"><span>예산낭비신고센터</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/shop.do?menuIdx=453" target="_blank"><span>상가무단전대양도신고</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=459&channel=5" target="_blank"><span>계약관련 부조리 신고</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/hadoList.do?menuIdx=466" target="_blank"><span>하도급부조리 신고</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=811" target="_blank"><span>부패비리 변호사 대리신고</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=463&channel=2" target="_blank"><span>공익신고</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=842&channel=7" target="_blank"><span>공공재정 부정청구행위 신고</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=877', 'N');"><span>개인정보처리방침</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=877" target="_blank"><span>개인정보처리방침</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=469" target="_blank"><span>영상정보운영방침</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=470" target="_blank"><span>개인정보삭제현황</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=760" target="_blank"><span>목적외 이용·제3자 제공 내역</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/board.do?menuIdx=549', 'N');"><span>정보목록</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=549" target="_blank"><span>정보목록</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=550', 'N');"><span>정보공개청구</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=550" target="_blank"><span>정보공개청구</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/board.do?menuIdx=446', 'N');"><span>결재문서/회의록</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="http://opengov.seoul.go.kr/sanction?searchKeyword=&sysid=staterun%2C100223&startDate=&endDate" target="_blank" title="새창으로 열림"><span>결재문서(서울시 연계)</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=446" target="_blank"><span>회의록</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=447" target="_blank"><span>위원회운영현황</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/board.do?menuIdx=119', 'N');"><span>청탁금지법</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=119" target="_blank"><span>청탁금지법 자료실</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=465&channel=4" target="_blank"><span>청탁금지법 위반행위 신고</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						</ul>
+					</div> <!--//gnb-box2 -->
+			</div><!--//sgnb-wp -->
+		</li>
+		<li class="mn6"   >
+		<h2><a href="#;" title="1"  onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=503', 'N');"><span>매뉴얼</span></a></h2>
+
+			<div class="sgnb-wp">
+				<div class="gnb-box2">
+					<h3>공사 소개</h3>
+					
+					<ul class="gnb2 clearfix">
+						
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=503', 'N');"><span>서울교통공사</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=503" target="_blank"><span>CEO 인사말</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/orgList.do?menuIdx=504" target="_blank"><span>조직도 및 업무안내</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=505" target="_blank"><span>찾아오시는 길</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=715" target="_blank"><span>사이버역사관</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=817" target="_blank"><span>서울교통공사 Now</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=507', 'N');"><span>공사 이미지</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=507" target="_blank"><span>CI·슬로건</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=508" target="_blank"><span>캐릭터</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=509" target="_blank"><span>로고송</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=764" target="_blank"><span>홍보자료</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=512', 'N');"><span>경영정보</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=512" target="_blank"><span>개요 및 연혁</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=513" target="_blank"><span>운행현황</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=514" target="_blank"><span>경영목표</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=515" target="_blank"><span>사업계획</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=517" target="_blank"><span>예산서</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=516" target="_blank"><span>회계결산</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=106" target="_blank"><span>외부평가</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=108" target="_blank"><span>요청사항(지시사항) 현황</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=110" target="_blank"><span>재무제표</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=111" target="_blank"><span>내부감사활동</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=758" target="_blank"><span>외부감사활동</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=869" target="_blank"><span>ESG채권 발행 현황</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=519" target="_blank"><span>이사회 의결</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/board.do?menuIdx=804', 'N');"><span>사회적가치</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=804" target="_blank"><span>혁신계획</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=521" target="_blank"><span>사회공헌</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=796" target="_blank"><span>직장어린이집</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/board.do?menuIdx=557', 'N');"><span>채용정보</span></a>
+
+
+								<ul class="gnb3 row1">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=557" target="_blank"><span>채용정보</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=723" target="_blank"><span>인재상</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=755" target="_blank"><span>인사제도</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=855', 'N');"><span>인권경영</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=855" target="_blank"><span>인권경영 소개</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=782" target="_blank"><span>인권경영 규정</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=853" target="_blank"><span>인권경영 소식</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=851&channel=8" target="_blank"><span>인권침해 신고</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/page.do?menuIdx=861', 'N');"><span>적극행정</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=861" target="_blank"><span>제도소개</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=862" target="_blank"><span>실행계획</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=863" target="_blank"><span>자료실</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						<li  >
+							<div class="gnb-box3">
+
+							<a href="#;"   onClick="topMenuClick('https://www.seoulmetro.co.kr/kr/board.do?menuIdx=518', 'N');"><span>관련법령 및 사규</span></a>
+
+
+								<ul class="gnb3 row2">
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=518" target="_blank"><span>정관 및 사규</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=595" target="_blank"><span>관련법령</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=334" target="_blank"><span>사규제개정 및 폐기예고</span></a></li>
+									
+									<li ><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=105" target="_blank"><span>법률고문현황</span></a></li>
+									
+									</ul>
+								</div>
+						</li>
+						</ul>
+					</div> <!--//gnb-box2 -->
+			</div><!--//sgnb-wp -->
+		</li>
+		</ul>
+  </div>	
+</div>					
+					<div class="site-map-mask"></div>
+<div class="site-map-wp">
+						<div class="site-map-head">
+							<h2>사이트맵</h2>
+						</div>
+						<div class="site-map-body">
+							<div class="site-map-cont">
+							
+								<ul class="site-map-lst clearfix">
+
+
+              					<li>
+										<div>
+
+
+											<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=354" >이용정보</a>
+
+											<ul>
+
+
+												<li>
+															<a href="https://www.seoulmetro.co.kr/kr/cyberStation.do?menuIdx=538" target="_blank" title="새창으로 열림">사이버스테이션</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/cyberStation.do?menuIdx=538" target="_blank" title="새창으로 열림">사이버스테이션</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://smss.seoulmetro.co.kr/traininfo/traininfoUserView.do" target="_blank" title="새창으로 열림">실시간열차운행정보</a>
+								
+								
+															<ul>
+																<li><a href="https://smss.seoulmetro.co.kr/traininfo/traininfoUserView.do" target="_blank" title="새창으로 열림">실시간열차운행정보</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/delayProofList.do?menuIdx=543" target="_blank">간편지연증명서</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/delayProofList.do?menuIdx=543" target="_blank">간편지연증명서</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=354" target="_blank">운임제도</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=354" >운임안내</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=355" >승차권안내</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/fare.do?menuIdx=527" >단체권운임안내</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=528" >여객운송약관(1~8호선)</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=779" >여객운송약관(9호선 언주~중앙보훈병원)</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=366" target="_blank">이용고객 편의시설</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=366" target="_blank">배려시설 현황</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/equipmentList.do?menuIdx=367" target="_blank">승강설비 가동현황</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=769" target="_blank">휠체어 이용 승·하차 안내</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=569" target="_blank">무인편의기기</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=195" target="_blank">문화공간</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=540" target="_blank">환승주차장</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=542" target="_blank">자전거 보관함</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=588" target="_blank">수유실</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=746" target="_blank">잠실광역환승센터</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=843" target="_blank">또타스토리지(개인창고)</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/tempClosurList.do?menuIdx=775" target="_blank">역시설물 임시폐쇄 공사현황</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/tempClosurList.do?menuIdx=775" target="_blank">역시설물 임시폐쇄 공사현황</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=730" target="_blank">유실물센터</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=730" target="_blank">이용안내</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=541" target="_blank">유실물센터</a></li>
+																	</ul>
+															</li>
+						
+													</ul>
+             							</div>
+             						</li>
+								<li>
+										<div>
+
+
+											<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=479" target="_blank">안전환경</a>
+
+											<ul>
+
+
+												<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=479" target="_blank">안전가이드</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=480" target="_blank">안전수칙</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=482" target="_blank">열차내에서</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=483" target="_blank">교통약자배려시설 이용시</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=484" target="_blank">지진발생시</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=485" target="_blank">화재시</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=734" target="_blank">안전헌장</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=734" target="_blank">안전헌장</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=552" target="_blank">안전경영방침</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=552" target="_blank">안전경영방침</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=553" target="_blank">안전관련법령</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=553" target="_blank">안전관련법령</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=554" target="_blank">안전보고서</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=554" target="_blank">안전보고서</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=498" target="_blank">산업현황</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=498" target="_blank">산업재산권현황</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=499" target="_blank">신사업개발현황</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=500" target="_blank">철도사업현황</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=501" target="_blank">기술연구자료실</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=808" target="_blank">교통정책자료실</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=555" target="_blank">안전동영상</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=555" target="_blank">안전동영상</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=488" target="_blank">안전장비 취급 및 현황</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=489" target="_blank">안전장비 취급요령</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=490" target="_blank">역사 내 안전장비</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=491" target="_blank">열차 내 안전장비</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=556" target="_blank">지하철테러대응</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=556" target="_blank">지하철테러대응</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=739" target="_blank">자료실</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=494" target="_blank">지하철역 환경</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=494" target="_blank">개요</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=495" target="_blank">측정결과</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=496" target="_blank">위생관리</a></li>
+																	</ul>
+															</li>
+						
+													</ul>
+             							</div>
+             						</li>
+								<li>
+										<div>
+
+
+											<a href="https://www.seoulmetro.co.kr/kr/volunteer.do?menuIdx=396&reservegroupid=1" target="_blank">시민 참여</a>
+
+											<ul>
+
+
+												<li>
+															<a href="https://www.seoulmetro.co.kr/kr/volunteer.do?menuIdx=396&reservegroupid=1" target="_blank">신청센터</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/volunteer.do?menuIdx=396&reservegroupid=1" target="_blank">자원봉사</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/garage.do?menuIdx=401&reservegroupid=3" target="_blank">차량사업소견학</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/rent.do?menuIdx=394" target="_blank">미술관 대관</a></li>
+																	<li><a href="https://hrd.seoulmetro.co.kr/jsp/user/center/loanInquiry.jsp" target="_blank" title="새창으로 열림">인재개발원 대관</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/filmList.do?menuIdx=395" target="_blank">시설물 촬영</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/engineer.do?menuIdx=399" target="_blank">기관사 체험</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/safetyExperience.do?menuIdx=753&reservegroupid=6" target="_blank">시민안전체험·홍보관</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/eventList.do?menuIdx=392" target="_blank">이벤트</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/eventList.do?menuIdx=545" target="_blank" title="새창으로 열림">참여하기</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=91" target="_blank">제안하기</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=385" target="_blank">시민안전모니터</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=385" target="_blank">안내</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=386" target="_blank">공지사항</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/privateList.do?menuIdx=135&cdvocchannel=3" target="_blank">모니터링</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=388" target="_blank">고객서비스 헌장</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=388" target="_blank">고객서비스 헌장</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=389" target="_blank">이행 표준</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/serviceQualityList.do?menuIdx=871" target="_blank">이행 실적</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/executionList.do?menuIdx=390" target="_blank">이행 실적(9호선)</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/juminyesanList.do?menuIdx=785" target="_blank">주민참여예산</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/juminyesanList.do?menuIdx=785" target="_blank">제안하기</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=813" target="_blank">연도별 사업추진 실적</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=374" target="_blank">고객의 소리</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=374" target="_blank">이용 안내</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=375" target="_blank">자주 묻는 질문</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=376" target="_blank">신청</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/themeList.do?menuIdx=410" target="_blank">문화스테이션</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/themeList.do?menuIdx=410" target="_blank">테마여행</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=409" target="_blank">지하철 여행</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/concertList.do?menuIdx=411" target="_blank">공연프리존</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=762" target="_blank">아티스트 소개</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=413" target="_blank">문화갤러리</a></li>
+																	<li><a href="https://webzine.seoulmetro.co.kr/newshome/mtnmain.php" target="_blank" title="새창으로 열림">서울교통공사 웹진</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/ideaList.do?menuIdx=379&bbs_cd=pro001" target="_blank">시민 아이디어</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/ideaList.do?menuIdx=379&bbs_cd=pro001" target="_blank">아이디어 보기</a></li>
+																	</ul>
+															</li>
+						
+													</ul>
+             							</div>
+             						</li>
+								<li>
+										<div>
+
+
+											<a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=546" target="_blank">알림마당</a>
+
+											<ul>
+
+
+												<li>
+															<a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=546" target="_blank">공지사항</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=546" target="_blank">공지사항</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=547" target="_blank">보도자료</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=547" target="_blank">보도자료</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=417" target="_blank">입찰/계약정보</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=417" target="_blank">입찰안내</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=418" target="_blank">발주계획</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=423" target="_blank">사전규격공개</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/noticeList.do?menuIdx=419" target="_blank">입찰공고 및 결과</a></li>
+																	<li><a href="privList.do?menuIdx=776&zmetd2=03" target="_blank">계약현황</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/payList.do?menuIdx=422" target="_blank">대금지급안내</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=424" target="_blank">제안서 평가결과</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=751" target="_blank">건설공사/하도급계약현황</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/printList.do?menuIdx=420" target="_blank">실적증명서 발급</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/privList.do?menuIdx=425" target="_blank">수의계약내역 및 실적</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=421" target="_blank">계약자료실</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=822" target="_blank">계약내용 변경사항</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=823" target="_blank">감리·감독·검사 현황</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=428" target="_blank">부대사업정보</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=428" target="_blank">광고시설물</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=429" target="_blank">편의시설물</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/mallList.do?menuIdx=430" target="_blank">역구내상가</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=833" target="_blank">자주묻는질문</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=548" target="_blank">자료실</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=548" target="_blank">자료실</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=849" target="_blank">업무협의절차</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=849" target="_blank">인접굴착공사</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=850" target="_blank">연결통로설치</a></li>
+																	</ul>
+															</li>
+						
+													</ul>
+             							</div>
+             						</li>
+								<li>
+										<div>
+
+
+											<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=435" target="_blank">정보공개</a>
+
+											<ul>
+
+
+												<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=435" target="_blank">제도안내</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=435" target="_blank" >정보공개제도란</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=436" target="_blank">관련규정</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=437" target="_blank" >관련서식</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=828" target="_blank">비공개대상정보 세부기준</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=867" target="_blank">자주 청구하는 항목 안내</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=820&sort_order=asc" target="_blank">사전정보공표</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=820&sort_order=asc" target="_blank">사전정보 공표목록</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=441" target="_blank" >업무추진비</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=872" target="_blank">자주 조회하는 사전정보</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=551" target="_blank">공공데이터개방</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=551" target="_blank">공공데이터개방</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=846" target="_blank">공공데이터 수요조사</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=875" target="_blank">반부패/청렴</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=875" target="_blank">반부패/청렴관련 사규</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=455" target="_blank">반부패/청렴활동 자료실</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=458" target="_blank">부패공직자 현황 공개</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=460" target="_blank">청렴도 및 시책평가 결과</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=829&channel=6" target="_blank">부조리신고센터</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=829&channel=6" target="_blank">인사비리 제보신고</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=462&channel=1" target="_blank">공직자비리신고</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=464&channel=3" target="_blank">갑의 부당행위 신고</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/waste.do?menuIdx=451&cdvocchannel=11" target="_blank">예산낭비신고센터</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/shop.do?menuIdx=453" target="_blank">상가무단전대양도신고</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=459&channel=5" target="_blank">계약관련 부조리 신고</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/hadoList.do?menuIdx=466" target="_blank">하도급부조리 신고</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=811" target="_blank">부패비리 변호사 대리신고</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=463&channel=2" target="_blank">공익신고</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=842&channel=7" target="_blank">공공재정 부정청구행위 신고</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=877" target="_blank">개인정보처리방침</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=877" target="_blank">개인정보처리방침</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=469" target="_blank">영상정보운영방침</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=470" target="_blank">개인정보삭제현황</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=760" target="_blank">목적외 이용·제3자 제공 내역</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=549" target="_blank">정보목록</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=549" target="_blank">정보목록</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=550" target="_blank">정보공개청구</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=550" target="_blank">정보공개청구</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=446" target="_blank">결재문서/회의록</a>
+								
+								
+															<ul>
+																<li><a href="http://opengov.seoul.go.kr/sanction?searchKeyword=&sysid=staterun%2C100223&startDate=&endDate" target="_blank" title="새창으로 열림">결재문서(서울시 연계)</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=446" target="_blank">회의록</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=447" target="_blank">위원회운영현황</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=119" target="_blank">청탁금지법</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=119" target="_blank">청탁금지법 자료실</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=465&channel=4" target="_blank">청탁금지법 위반행위 신고</a></li>
+																	</ul>
+															</li>
+						
+													</ul>
+             							</div>
+             						</li>
+								<li>
+										<div>
+
+
+											<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=503" target="_blank">공사 소개</a>
+
+											<ul>
+
+
+												<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=503" target="_blank">서울교통공사</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=503" target="_blank">CEO 인사말</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/orgList.do?menuIdx=504" target="_blank">조직도 및 업무안내</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=505" target="_blank">찾아오시는 길</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=715" target="_blank">사이버역사관</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=817" target="_blank">서울교통공사 Now</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=507" target="_blank">공사 이미지</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=507" target="_blank">CI·슬로건</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=508" target="_blank">캐릭터</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=509" target="_blank">로고송</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=764" target="_blank">홍보자료</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=512" target="_blank">경영정보</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=512" target="_blank">개요 및 연혁</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=513" target="_blank">운행현황</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=514" target="_blank">경영목표</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=515" target="_blank">사업계획</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=517" target="_blank">예산서</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=516" target="_blank">회계결산</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=106" target="_blank">외부평가</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=108" target="_blank">요청사항(지시사항) 현황</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=110" target="_blank">재무제표</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=111" target="_blank">내부감사활동</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=758" target="_blank">외부감사활동</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=869" target="_blank">ESG채권 발행 현황</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=519" target="_blank">이사회 의결</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=804" target="_blank">사회적가치</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=804" target="_blank">혁신계획</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=521" target="_blank">사회공헌</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=796" target="_blank">직장어린이집</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=557" target="_blank">채용정보</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=557" target="_blank">채용정보</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=723" target="_blank">인재상</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=755" target="_blank">인사제도</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=855" target="_blank">인권경영</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=855" target="_blank">인권경영 소개</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=782" target="_blank">인권경영 규정</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=853" target="_blank">인권경영 소식</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/staff.do?menuIdx=851&channel=8" target="_blank">인권침해 신고</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=861" target="_blank">적극행정</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=861" target="_blank">제도소개</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=862" target="_blank">실행계획</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=863" target="_blank">자료실</a></li>
+																	</ul>
+															</li>
+						
+													<li>
+															<a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=518" target="_blank">관련법령 및 사규</a>
+								
+								
+															<ul>
+																<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=518" target="_blank">정관 및 사규</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=595" target="_blank">관련법령</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=334" target="_blank">사규제개정 및 폐기예고</a></li>
+																	<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=105" target="_blank">법률고문현황</a></li>
+																	</ul>
+															</li>
+						
+													</ul>
+             							</div>
+             						</li>
+								</ul>
+								<a href="#;" class="btn-close-sitemap"><img src="https://www.seoulmetro.co.kr/images/layout/btn_close_sitemap.png"  alt="닫기" /></a>
+							</div><!-- //site-map-cont -->
+						</div><!-- //site-map-body -->
+						
+						
+					</div><!-- //site-map-wp -->
+					
+					<input type = "hidden" value = "" id = "isMobile" />
+					
+					
+				</div> <!-- //inner  -->
+				
+			<form name="Search" id="Search" action="https://www.seoulmetro.co.kr/kr/search.do" method="post">				
+				<div class="total-sch-box">
+					<div class="total-sch cleafix">
+						<span class="input-wp">
+							<label for="SRCH_TEXT" class="hide">검색어 입력</label>
+							<input name="SRCH_TEXT" id="SRCH_TEXT" type="text" class="int-t" placeholder="검색어를 입력하세요." />
+						</span>
+						<label for="s3" class="hide"></label>
+						<input id="s3" type="submit" class="total-shc-btn" value="검색" />
+						<span class="btn-tsch-close"><a href="#;"><img src="https://www.seoulmetro.co.kr/images/layout/btn_a_delete4.gif" alt="닫기"></a></span>
+
+
+					</div><!-- //total-sch -->
+				</div> <!-- //total-sch-box -->
+			</form>				
+				<div class="tm-gnb-mask"></div>
+			
+			</div> <!-- //header  -->
+
+
+
+			 <script>
+				$(document).ready(function() {
+					$('#fullpage').fullpage({
+						autoScrolling: true,
+						//navigation: true,
+						//navigationPosition: 'right',
+						keyboardScrolling: true,
+						responsiveWidth: 1025,
+						scrollBar: true,
+						anchors:['firstPage','secondPage', '3rdPage'],
+						 menu: '#menu',
+					});
+				});
+			</script>
+			<script>
+				function fnMove(seq){
+					var offset = $('#section' + seq).offset();
+					$('html,body').animate({scrollTop : offset.top-61} , 400);
+			}
+			
+			</script>
+<div class="main-body">
+<div>
+<div>
+<div>
+			<div class="container">
+
+					<!-- <a href="https://www.seoulmetro.co.kr/kr/cyberStation.do?menuIdx=538"  target="_blank" title="새창" class="btn-cyberstation fix">
+						<span>사이버스테이션</span>
+					</a> -->
+				
+				<!-- 페이지네비게이션 -->
+				<!-- <ul id="menu">
+					<li data-menuanchor="firstPage" class="active"><a href="#firstPage" ><span>Service</span></a></li>
+					<li data-menuanchor="secondPage"><a href="#secondPage"><span>Info</span></a></li>
+					<li data-menuanchor="3rdPage"><a href="#3rdPage"><span>Culture</span></a></li>
+				</ul> -->
+				<!-- //페이지네비게이션 -->
+				
+				
+				<div id="fullpage">
+				
+
+					<div class="section" id="section01">
+						<h3 style="position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);">Service</h3>
+						<div class="m-box pos1">
+						<h4 style="overflow:hidden;position:absolute;border:0;width:1px;height:1px;clip:rect(1px,1px,1px,1px);">안전한 도시철도, 편리한 교통 서비스 - 서울교통공사가 도시교통의 미래를 만들어 갑니다.</h4>
+							<div class="intro2">
+								<div class="h-group-2">
+									<!-- <h4><img src="https://nonstopbebe.s3.ap-northeast-2.amazonaws.com/text1.png" alt="안전한 도시철도, 편리한 교통 서비스"><br>
+										<img src="https://nonstopbebe.s3.ap-northeast-2.amazonaws.com/text2.png" alt="서울교통공사가 도시교통의 미래를 만들어 갑니다." class="s-title"></h4> -->
+									<h3><img src="https://nonstopbebe.s3.ap-northeast-2.amazonaws.com/text3.png" alt="Move the City" /></h3>
+								</div> <!-- //texts -->
+								<div class="sc1-box">
+									<!-- <div class="cont_top_lf">
+										</div> -->
+
+										<a href="https://www.seoulmetro.co.kr/kr/cyberStation.do?menuIdx=538" target="_blank" title="새창" class="btn-cyberstation"><span>사이버스테이션</span></a>
+									</div>
+						
+									<div class="cont_top_lf2">
+										<h4><img src="https://nonstopbebe.s3.ap-northeast-2.amazonaws.com/text1.png" alt="안전한 도시철도, 편리한 교통 서비스"><br>
+										<img src="https://nonstopbebe.s3.ap-northeast-2.amazonaws.com/text2.png" alt="서울교통공사가 도시교통의 미래를 만들어 갑니다." class="s-title2"></h4>
+										</div>
+									
+									<div class="cont_top_ct2">
+										<div class="lg_all">
+											<!-- <div class="con_top_tit">서울교통공사 소식</div> -->
+											<div class="lg_all_img">
+												<a style="display:block;" href="/nonstop_main" target="_blank"><img src="https://nonstopbebe.s3.ap-northeast-2.amazonaws.com/nonstop.png" alt="지하철 무정차 시스템 - 비상 상황 시 모니터링 및 상황 전파를 할 수 있습니다."/></a>
+											</div>
+										</div>
+										<div class="lg_all">
+											<!--<div class="con_top_tit">실시간 열차운행정보</div> -->
+											<div class="lg_all_img">
+												<a style="display:block;" href="https://smapp.seoulmetro.co.kr:58443/traininfo/traininfoUserView.do" target="_blank"><img src="https://nonstopbebe.s3.ap-northeast-2.amazonaws.com/live.png" alt="실시간 열차운행정보 - 현재 열차의 위치를 실시간으로 확인해보세요."/></a>
+											</div>
+										</div>
+												
+												
+									</div>
+						
+									<div class="cont_top_rt">
+										<!--<div class="con_top_tit">지하철 이용정보</div>-->
+										<div class="mrt_btn_all">
+											<p>
+												<a class="bg01" href="/4" target="_blank"><span>유실물 찾기</span></a>
+											</p>
+											<p>
+												<a class="bg02" href="/3" target="_blank"><span>운임 안내</span></a>
+											</p>
+											<p>
+												<a class="bg03" href="/1" target="_blank"><span>교통약자 배려시설</span></a>
+											</p>
+											<p>
+												<a class="bg04" href="/5" target="_blank"><span>이용고객 편의시설</span></a>
+											</p>
+											<p>
+												<a class="bg05" href="/2" target="_blank"><span>승강설비 가동현황</span></a>
+											</p>
+										</div>
+									</div>
+									<p class="clear"></p>
+									<!-- <div class="cont_bottom_lf">
+										<div class="pop">
+											<div class="pop-in">
+												<a href="#;" class="stop-start-pop" style="border:1px solid #FFF; display:block; color:#fff; font-size:12px; position:absolute; bottom:0; padding:2px;">정지</a>
+												<a href="#;" onClick="prevPop();" class="prev-link" title="팝업 이전으로"><div class="prev-btn"></div></a>
+												<ul class="list">
+													
+
+
+
+	
+
+		<li><a href="http://www.seoulmetro.co.krhttps://www.seoulmetro.co.kr/kr/board.do?menuIdx=557&bbsIdx=2214783" target=""><img src="https://postfiles.pstatic.net/MjAyMjExMjJfNSAg/MDAxNjY5MDk3NjYzODk0.VPrDAQTCEfQ_EW-f3hRY3QQ2VwQyn-4WjrbfxTSCiLcg.seuwtsF4AKb65TkHSlIhCEFiZO0kITl2OUb9nv-eQxwg.PNG.diaak3213/banner.png?type=w966" alt="2022년 신입사원 공개채용 면접시험 합격자 공고
+합격자 발표: 2022.11.30.(수)"></a></li>
+		
+	
+ 
+												</ul>
+												<a href="#;" onClick="nextPop();" class="next-link" title="팝업 다음으로"><div class="next-btn"></div></a>
+												<div class="bar">
+													<ul class="nav">
+							
+													</ul>
+												</div>
+												<div class="indicator">
+												
+												</div>
+											</div>
+										</div>
+									</div> -->
+									<div class="cont_bottom_rt">
+										<div class="cont_btn">
+											<a style="display:block;" href="https://www.seoulmetro.co.kr:444https://www.seoulmetro.co.kr/kr/page.do?menuIdx=376" target="_blank"><img src="https://www.seoulmetro.co.kr/images/main/main-2023-03.png" alt="고객의 소리"></a>
+										</div>
+										<div class="cont_btn">
+											<a style="display:block;" href="http://www.seoulmetro.co.krhttps://www.seoulmetro.co.kr/kr/board.do?menuIdx=375" target="_blank"><img src="https://www.seoulmetro.co.kr/images/main/main-2023-04.png" alt="자주묻는 질문"></a>
+										</div>
+									</div>
+									<p class="clear"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+
+
+
+				<!-- purplek  section1 end -->	
+					
+					
+				
+				</div>
+			</div> 
+
+<!--twitter 작업시작 -->
+
+<script src="https://www.seoulmetro.co.kr/js/oauth.js"></script>
+<script src="https://www.seoulmetro.co.kr/js/sha1.js"></script>
+<script>
+
+//검색 박스들 보이기
+
+				
+$(function(){
+	fn_twitterTimeline();
+	//fn_facebookTimeline();
+	$("#st_station_rateinfo").click(function(){
+		document.getElementById("total_select1").style.display = "block";
+		document.getElementById("total_select2").style.display = "none";
+		search_station(1,document.getElementById("st_station_rateinfo").value);
+	});
+	$("#en_station_rateinfo").click(function(){
+		document.getElementById("total_select1").style.display = "none";
+		document.getElementById("total_select2").style.display = "block";
+		search_station(2,document.getElementById("en_station_rateinfo").value);
+	});
+	$("#st_station_rateinfo").keypress(function(){
+		document.getElementById("total_select1").style.display = "block";
+		document.getElementById("total_select2").style.display = "none";
+		search_station(1,document.getElementById("st_station_rateinfo").value);
+	});
+	$("#en_station_rateinfo").keypress(function(){
+		document.getElementById("total_select1").style.display = "none";
+		document.getElementById("total_select2").style.display = "block";
+		search_station(2,document.getElementById("en_station_rateinfo").value);
+	});
+	$("#total_select1").focusout(function(){
+		document.getElementById("total_select1").style.display = "none";
+	});
+	$("#total_select2").focusout(function(){
+		document.getElementById("total_select2").style.display = "none";
+	});
+}); 
+
+function batch_rateinfo(){				//일반운임 계산
+	var frm = document.frm_rateinfo;	//해당폼
+
+	var st_st     = document.getElementById("st_station_rateinfo_value");	//출발역
+	var en_st     = document.getElementById("en_station_rateinfo_value");	//도착역
+
+	if(st_st.value.length < 1 || en_st.value.length < 1){			//출발역 과 도착역의 입력을 제대로 해야만 동작 안한다면 return
+		alert("출발역과 도착역을 제대로 입력하여 주십시오");
+		return;
+	}
+	
+	window.open("https://www.seoulmetro.co.kr/kr/cyberStation.do?menuIdx=538&departureId=" + st_st.value + "&arrivalId=" + en_st.value);
+//	frm.st_station.value = st_st.value;
+//	frm.en_station.value = en_st.value;
+//	frm.target = "ifrm_fake";
+//	frm.action = "https://www.seoulmetro.co.kr/kr/batch_regulerfare.do";					//java에 파라미터를 전달
+//	frm.submit();
+}
+
+function search_station(ck,val){				//자동완성기능
+	var objSel = "";
+	if(ck == 1){
+		objSel = document.getElementById("total_select1");
+	}
+	else if(ck == 2){
+		objSel = document.getElementById("total_select2");
+	}
+	
+	var select_cnt = "767";				
+
+	objSel.options.length = 0;
+	for(var i = 0; i < select_cnt; i++){
+		var name = "hid_name"+i;
+		var code = "hid_code"+i;
+		var select_name = document.getElementById(name).value;
+		var select_code = document.getElementById(code).value;
+
+		if((select_name.indexOf(val)) != -1){
+
+			var op = new Option(); 
+			op.value = select_code; // 값 설정 
+	        op.text = select_name; // 텍스트 설정 
+	        objSel.options.add(op); // 옵션 추가 
+		}
+	}
+
+	//최대갯수 조절
+	if(objSel.options.length ==1){
+		objSel.size = 2;
+	} else if(objSel.options.length < 9){
+		objSel.size = objSel.options.length;
+	}
+	else{
+		objSel.size = 9;
+	}
+	
+	if(event.keyCode == '40'){
+		objSel.focus();
+		objSel.options[0].selected='selected';
+	}
+}
+
+function keyup_val(ck,id){				//검색기능에서 온클릭이벤트로 코드,역 정보 가져오기
+  if ( event.keyCode == 13 ){
+  	search_val_batch(ck,id);
+
+    if(ck == 1 ){
+  	  $('#en_station_rateinfo').focus();
+    }else if(ck== 2){
+  	  $('.btn-sbm').focus();
+    }
+  }
+}
+function search_val_batch(ck,id){				//검색기능에서 온클릭이벤트로 코드,역 정보 가져오기
+	var select_box = document.getElementById(id);
+	var text = select_box.options[select_box.selectedIndex].text;
+	var val = select_box.options[select_box.selectedIndex].value;
+	if(ck == 1){
+		document.getElementById("st_station_rateinfo").value = text;
+		document.getElementById("st_station_rateinfo_value").value = val;
+		select_box.style.display = "none";
+	}
+	else if(ck == 2){
+		document.getElementById("en_station_rateinfo").value = text;
+		document.getElementById("en_station_rateinfo_value").value = val;
+		select_box.style.display = "none";
+	}
+}
+
+function fn_twitterTimeline(){
+	var twitterPrm = {
+		api: 'https://api.twitter.com/1.1/statuses/user_timeline.json',
+		count: 2, //불러올 타임라인 수
+		callback: "fn_makedocTwitter",//함수를 호출하여JSON데이터를 넘겨줍니다.
+		
+		consumerKey: "kDyC3xXX1pTvNTGIe8wW8m4QP",
+		consumerSecret: "bmBo9g5GS76fyLMGbXTh1uMJpiRULjL15R5IY1fA86HUMKexz7",
+		accessToken: "64331888-VG6fd6NzKwHSaNGAGOarv7M1fJMTSEZ7ZLYKyjrJy",
+		tokenSecret: "DPSPJdlgcN1xom2X8ukEK7ni0f84kTxjTONRZlJY2Pnwc"
+	}
+	var oauthMessage ={
+		method: "GET",
+		action: twitterPrm.api,
+		parameters: {
+			count: twitterPrm.count,
+			callback: twitterPrm.callback,
+			oauth_version: "1.0",
+			oauth_signature_method: "HMAC-SHA1",
+			oauth_consumer_key: twitterPrm.consumerKey,
+			oauth_token: twitterPrm.accessToken
+		}
+	};
+
+	//Outh인증관련
+	OAuth.setTimestampAndNonce(oauthMessage);
+	OAuth.SignatureMethod.sign(oauthMessage, {
+		consumerSecret: twitterPrm.consumerSecret,
+		tokenSecret: twitterPrm.tokenSecret
+	});
+
+	//Outh인증끝
+	//Outh인증하여 URL리턴(jsonType)
+	var twJsonPath = OAuth.addToURL(oauthMessage.action, oauthMessage.parameters);
+
+	//alert(twJsonPath);
+	$.ajax({
+		type: oauthMessage.method,
+		url: twJsonPath,
+		dataType: "jsonp",
+		jsonp: false,
+		cache: true
+	});
+}
+
+function fn_makedocTwitter(data){
+	var timeLine='';
+	var text;
+	var dateObj;
+	var sns_reads='';
+	
+	for(var i=0, len=data.length;i<len;i++){
+		text = data[i].text;
+		//URL링크
+		//text = text.replace(/(https?:\/\/[\S]+)/gi,'<a href="$1">$1</a>');
+		//헤시테그연결
+		//text = text.replace(/#(\w+)/gi,'<a href="http://twitter.com/search?q=%23$1">#$1</a>');
+		//멘션연결
+		//text = text.replace(/@(\w+)/gi,'<a href="http://twitter.com/$1">@$1</a>');
+		
+		
+		//URL링크
+		text = text.replace(/(https?:\/\/[\S]+)/gi,'$1');
+		//헤시테그연결
+		text = text.replace(/#(\w+)/gi,'#$1');
+		//멘션연결
+		text = text.replace(/@(\w+)/gi,'@$1');
+		
+		//보안에서 필터링 되는 문자 변경
+		/*
+		text = text.replace(/\,/g,"__comma__");
+		*/
+		text = text.replace(/#/g,"__sharp__");
+		text = text.replace(/\"/g,"__doublequot__");
+		
+		/*
+		text = text.replace(/</g,"__lt__");
+		text = text.replace(/>/g,"__gt__");
+		text = text.replace(/\"/g,"__double__");
+		text = text.replace(/href/,"__h_r_e_f__");
+		text = text.replace(/http/,"__h_t_t_p__");
+		text = text.replace(/\//g,"__slush__");
+		text = text.replace(/=/g,"__equal__");
+		text = text.replace(/:/g,"__colon__");
+		text = text.replace(/@/g,"__gol__");
+		*/
+		
+		var arr = data[i].created_at.split(' ');
+		var monthString = arr[1];
+		if(monthString == 'Jan'){
+			monthString = '01';
+		}else if(monthString == 'Feb'){
+			monthString = '02';
+		}else if(monthString == 'Mar'){
+			monthString = '03';
+		}else if(monthString == 'Apr'){
+			monthString = '04';
+		}else if(monthString == 'May'){
+			monthString = '05';
+		}else if(monthString == 'Jun'){
+			monthString = '06';
+		}else if(monthString == 'Jul'){
+			monthString = '07';
+		}else if(monthString == 'Aug'){
+			monthString = '08';
+		}else if(monthString == 'Sep'){
+			monthString = '09';
+		}else if(monthString == 'Oct'){
+			monthString = '10';
+		}else if(monthString == 'Nov'){
+			monthString = '11';
+		}else if(monthString == 'Dec'){
+			monthString = '12';
+		}
+		
+		var year = arr[5];
+		var il = arr[2];
+		var dateString = year+'-'+monthString+'-'+il;	
+			
+		var day = new Date(dateString);
+		
+		var timeArr = arr[3].split(':');
+		var utcHoursInt = parseInt(timeArr[0]) +9;
+		var minutes = timeArr[1];
+		var hour;
+		var month;
+		
+		if(utcHoursInt>=24){
+			day.setDate(day.getDate()+1)
+			hour = utcHoursInt - 24;
+			year = day.getFullYear();
+			month = day.getMonth()+1;
+			il = day.getDate();
+		}else{
+			hour = utcHoursInt;
+			year = day.getFullYear();
+			month = day.getMonth()+1;
+			il = day.getDate();
+		}
+		var compareString = year+'년'+month+'월'+il+'일'+' '+hour+'시'+minutes+'분';
+		
+		sns_reads = sns_reads.concat('<div class="sns_read">');
+		sns_reads = sns_reads.concat('<ul>');
+		sns_reads = sns_reads.concat('<li class=\"logo\"><img src=\"https://www.seoulmetro.co.kr/images/main/icon_tw.gif\" alt=\"서울교통공사 로고, 클릭시 트위터로 연결됩니다.\"></li>');
+		sns_reads = sns_reads.concat('<li class=\"twittername\"><a href=\"http://twitter.com/seoul_metro\" target=\"_blank\">서울교통공사</a></li>');
+		sns_reads = sns_reads.concat('<li class=\"twitterid\">@seoul_metro</li>');
+		sns_reads = sns_reads.concat('<li class=\"twitterdate\">');
+		sns_reads = sns_reads.concat(compareString);
+		sns_reads = sns_reads.concat('</li>');
+		sns_reads = sns_reads.concat('<li class=\"content\"><a href=\"http://twitter.com/seoul_metro\" target=\"_blank\">');
+		sns_reads = sns_reads.concat(text);
+		sns_reads = sns_reads.concat('</a></li>');
+		sns_reads = sns_reads.concat('</ul>');
+		sns_reads = sns_reads.concat('</div>');
+		
+		//timeLine += "<p>"+data[i].created_at+":"+text+"</p>";
+		
+	}
+	
+	$('#sns_reads').html(sns_reads);
+	
+}
+
+
+
+function fn_facebookTimeline(){
+  
+  var app_id='198203477382443';
+  var secret_code = '8d32f4ae4a1513e47e2236b1a5c68eb2';
+
+	
+	var url = 'https://graph.facebook.com/oauth/access_token?client_id='+app_id+'&client_secret='+secret_code+'&grant_type=client_credentials';
+	
+	
+	$.ajax({
+		url:url
+		,type:"GET"
+		,data:''
+		,dataType:'JSON'
+		,success:function(data){
+var access_token = data.access_token;			
+var url2="https://graph.facebook.com/v2.10/139301686243217?fields=posts.limit(2)%7Bmessage%2Ccreated_time%7D&access_token="+access_token;
+
+		
+			$.ajax({
+				url:url2
+				,type:"GET"
+				,dataType:'JSON'
+				,success:function(data){
+					var face_reads = '';
+					
+				for(var i=0;i<2;i++){
+
+		var utcString = data.posts.data[i].created_time;
+			
+			var utcArr = utcString.split('T');
+			var day = new Date(utcArr[0]);
+			
+			
+			var utcTimeArr = utcArr[1].split(':');
+			var utcHoursString = utcTimeArr[0];
+			var utcHoursInt = parseInt(utcHoursString) + 9;
+			var hour;
+			var minutes = utcTimeArr[1];
+			var year;
+			var month;
+			var il;
+			//24시간이 넘어가는 경우
+			if(utcHoursInt>=24){
+				
+				day.setDate(day.getDate()+1)
+				hour = utcHoursInt - 24;
+				year = day.getFullYear();
+				month = day.getMonth()+1;
+				il = day.getDate();
+				
+			}else{
+				
+				hour = utcHoursInt;
+				year = day.getFullYear();
+				month = day.getMonth()+1;
+				il = day.getDate();
+				
+			}
+		var compareString = year+'년'+month+'월'+il+'일'+' '+hour+'시'+minutes+'분';
+		
+		face_reads = face_reads.concat('<div class="sns_read">');
+		face_reads = face_reads.concat('<ul>');
+		face_reads = face_reads.concat('<li class=\"logo\"><img src=\"https://www.seoulmetro.co.kr/images/main/icon_fbook.gif\" alt=\"서울교통공사 로고, 클릭시 페이스북으로 연결됩니다.\"></li>');
+		face_reads = face_reads.concat('<li class=\"twittername\"><a href=\"http://facebook.com/SeoulMetro\" target=\"_blank\">서울교통공사</a></li>');
+		face_reads = face_reads.concat('<li class=\"twitterid\">@SeoulMetro</li>');
+		face_reads = face_reads.concat('<li class=\"twitterdate\">');
+		face_reads = face_reads.concat(compareString);
+		face_reads = face_reads.concat('</li>');
+		face_reads = face_reads.concat('<li class=\"content\"><a href=\"http://facebook.com/SeoulMetro\" target=\"_blank\">');
+		if(typeof data.posts.data[i].message === 'undefined'){
+		face_reads = face_reads.concat('');
+		}else{ face_reads = face_reads.concat(data.posts.data[i].message);
+}
+		face_reads = face_reads.concat('</a></li>');
+		face_reads = face_reads.concat('</ul>');
+		face_reads = face_reads.concat('</div>');	
+				
+
+				}	
+					
+					$('#face_reads').html(face_reads);
+					
+				}
+				,error:function(e){
+					console.log(e)
+				}
+				
+			})
+			
+			
+			
+		}
+		,error:function(e){
+			console.log(e)
+		}
+		
+	})
+
+}
+
+
+</script>
+/*
+				<script type="text/javascript">
+				
+				 cookiedata = document.cookie; 
+
+				 // alert(cookiedata.indexOf("ncookie=done"));
+				 if (cookiedata.indexOf("ncookie=done") < 0){ 
+				  // alert("false");
+				  document.getElementById('pop50').style.display = "block";
+				 } 
+				 else {
+				  // alert("true");
+				  document.getElementById('pop50').style.display = "none";
+				 }
+				
+				</script> 
+		
+*/
+			
+
+					</div><!--//inner  -->
+				</div><!-- //contents_area -->
+			</div> <!-- //container-->
+
+</div> <!--//sub-body  -->
+
+<script>
+var urlA = "";			//url주소	
+function cng_url(urlB){
+	urlA = urlB;
+}
+function go2page(){
+	if (urlA == "") return;
+	window.open(urlA,"");
+}
+</script>
+
+<div class="footer">
+			
+	<div class="footer-in">
+		<div class="foot-cont">
+			<!-- <span class="foot-logo"><img src="https://www.seoulmetro.co.kr/images/layout/f_logo.png" alt="서울교통공사 Seoul Metro" /></span>-->
+			
+			<div class="foot-list">
+				<ul class="clearfix">
+					<!-- <li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=451">예산낭비신고센터</a></li>
+					<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=505">찾아오시는 길</a></li>
+					<li class="pivacy"><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=742">개인정보처리방침</a></li>
+					<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=469">영상정보운영방침</a></li>
+					<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=470">개인정보삭제현황</a></li>-->
+					
+					<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=877">개인정보처리방침</a></li>
+					<li><a href="https://www.seoulmetro.co.kr/kr/page.do?menuIdx=528">여객운송약관</a></li>
+					<li><a href="https://www.seoulmetro.co.kr/kr/board.do?menuIdx=518">관련 법령 및 사규</a></li>
+					
+					
+					
+				</ul>
+				<p class="cpr" style="font-size:12px;">부산광역시 연제구 연제로23 3,4층 | 대표전화 4385-2115 Copyright 2022. BespinBaby All right reserved.
+				 &nbsp;&nbsp;<span class="clean-story" style="color:#fff"></span></p>
+			</div><!--//foot-list -->
+				
+			<div class="foot-etc clearfix">
+
+				
+				<div class="family-site clearfix">
+					<a href="#;" class="lb-family">유관기관 바로가기</a>
+					<span class="ctr"></span>
+					<ul class="famliy-list">
+						<li class="fm-first"><a href="#;" onclick = "cng_url('http://info.korail.com/mbs/www/index.jsp');">코레일</a></li>
+						<li><a href="#;" onclick = "cng_url('http://www.metro9.co.kr/site/main/index001');">서울시메트로9호선</a></li>
+						<li><a href="#;" onclick = "cng_url('http://www.ictr.or.kr/');">인천교통공사</a></li>
+						<li><a href="#;" onclick = "cng_url('http://www.arex.or.kr');">공항철도(주)</a></li>
+						<li><a href="#;" onclick = "cng_url('http://www.shinbundang.co.kr/index.jsp');">신분당선주식회사</a></li>
+						<li><a href="#;" onclick = "cng_url('http://www.shinbundang2.co.kr/');">경기철도주식회사</a></li>
+						<li><a href="#;" onclick = "cng_url('http://www.seohaerail.co.kr/');">서해철도(주)</a></li>
+						<li><a href="#;" onclick = "cng_url('http://www.humetro.busan.kr/default/main.do');">부산교통공사</a></li>
+						<li><a href="#;" onclick = "cng_url('http://www.grtc.co.kr/');">광주도시철도공사</a></li>
+						<li><a href="#;" onclick = "cng_url('http://www.dtro.or.kr/');">대구교통공사</a></li>
+						<li><a href="#;" onclick = "cng_url('http://www.djet.co.kr/kor/index.do');">대전교통공사</a></li>
+						<li><a href="#;" onclick = "cng_url('http://www.seoul.go.kr');">서울특별시</a></li>
+						<li><a href="#;" onclick = "cng_url('http://www.kr.or.kr/main.do');">한국철도시설공단</a></li>
+						<li><a href="#;" onclick = "cng_url('http://www.railsafety.or.kr/web/index.jsp?section=null&edmui=null');">철도안전정보포탈</a></li>
+						<li><a href="#;" onclick = "cng_url('http://www.kric.go.kr/index.jsp');">철도산업정보센터</a></li>
+						<li><a href="#;" onclick = "cng_url('https://www.seoulmetro.co.kr:444/vocsmrt/collaboration/common/Login.jsp');">협력사공간</a></li>
+						<!-- <li><a href="#;" onclick = "cng_url('https://www.seoulmetro.co.kr:444/vocsmrt/staffsquare/common/Login.jsp');">건강검진</a></li> -->
+						<!--<li><a href="#;" onclick = "cng_url('https://www.smrt.co.kr/program/member/loginEmployeeBoard.jsp?menuID=001009001&thref=/program/board/listLogin.jsp?menuID=001008007&boardTypeID=114');">직원게시판</a></li>-->
+						<!--<li><a href="#;" onclick = "cng_url('https://hrd.seoulmetro.co.kr/jsp/user/main/metro.jsp');">인재개발원</a></li>
+						<li><a href="#;" onclick = "cng_url('https://seoulmetro.ezwel.com/cuser/login/loginForm.ez?url=&clientFamilyNm=null&goUrl=');">복리후생관</a></li>
+						<li><a href="#;" onclick = "cng_url('https://www.seoulmetro.co.kr/kr/safetyExperience.do?menuIdx=753&reservegroupid=6&employee=Y');">직원 안전체험 신청</a></li>-->
+					</ul>
+				 </div>
+				 <a id="btn-fmy" class="btn-family" title="새창" href = "javascript:go2page();">GO</a>
+				<!-- <div class="seoul-banner" id="seoul">
+					<iframe id='08740852' name='08740852' title='홈페이지 접속 통계 수집 프레임입니다.' src='https://delivery.acecounter.com/delivery/www/delivery/afr.php?zoneid=510&amp;cb=INSERT_RANDOM_NUMBER_HERE' frameborder='0' scrolling='no' width='210' height='70'></iframe>
+					 -->
+
+			</div><!--//foot-etc -->
+		
+		</div> <!-- //foot-cont -->
+	</div> <!-- //footer-in -->
+
+</div> <!-- //footer -->
+</div> <!--//wrap -->
+
+<script>
+  //GNB 로딩 스크립트
+  //Yjs.Gnb.init('사이트코드','GNB 표출영역 ID'); 
+  /*
+  window.onload = function(){
+	  Yjs.Gnb.init('P003','seoul-common-gnb');
+  };
+  */
+</script>
+<script>
+	$(document).ready(function() {
+		var cleanStory = ["베스핀 베이비","신상훈은 뿌직뿌직","차현지는 끄적끄적","황동하는 잘생겼다","전 전을 부치는 전민준입니다. ","정혜원은 정회원"];
+		function rand(min, max) {
+		  return Math.floor(Math.random() * (max - min)) + min;
+		}
+		var randnum = rand(0,6);
+		$(".clean-story").html(cleanStory[randnum]);
+	});
+</script>
+	
+<!-- <script type="text/javascript">
+    var NL_domain = "smrt.loginside.co.kr";
+</script>
+<script type="text/javascript" src='https://www.seoulmetro.co.kr/js/loginside/loginside_script.js'></script> -->
+
+</body>
+
+
+
+
+	
+</html>
+
+
+
+
+
+			
+
+			
+
+				
+
+
+		
+
+
+
+
